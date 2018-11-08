@@ -1,37 +1,40 @@
-## Welcome to GitHub Pages
+# F.I.R.S.T Principles of Unit Testing
 
-You can use the [editor on GitHub](https://github.com/tekguard/Principles-of-Unit-Testing/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### FAST, ISOLATED/INDEPENDENT, REPEATABLE, SELF-VALIDATING and THOROUGH/TIMELY
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Fast
 
-### Markdown
+* A developer should not hesitate to run the tests as they are slow.
+* All of these including setup, the actual test and tear down should execute really fast (milliseconds) as you may have thousands of tests in your entire project.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Isolated/Independent
 
-```markdown
-Syntax highlighted code block
+* A test method should do the 3 As => Arrange, Act, Assert
+* Arrange: The data used in a test should not depend on the environment in which the test is running. All the data needed for a test should be arranged as part of the test.
+* Act: Invoke the actual method under test.
+* Assert: A test method should test for a single logical outcome, implying that typically there should be only a single logical assert. A logical assert could have multiple physical asserts as long as all the asserts test the state of a single object. In a few cases, an action can update multiple objects.
+* Avoid doing asserts in the Arrange part, let it throw exceptions and your test will still fail.
+* No order-of-run dependency. They should pass or fail the same way in suite or when run individually.
+* Do not do any more actions after the assert statement(s), preferably single logical assert.
 
-# Header 1
-## Header 2
-### Header 3
+### Repeatable
 
-- Bulleted
-- List
+* A test method should NOT depend on any data in the environment/instance in which it is running.
+* Deterministic results - should yield the same results every time and at every location where they run.
+* No dependency on date/time or random functions output.
+* Each test should setup or arrange it's own data.
+* What if a set of tests need some common data? Use Data Helper classes that can setup this data for re-usability.
 
-1. Numbered
-2. List
+### Self-Validating
 
-**Bold** and _Italic_ and `Code` text
+* No manual inspection required to check whether the test has passed or failed.
 
-[Link](url) and ![Image](src)
-```
+### Thorough
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/tekguard/Principles-of-Unit-Testing/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+* Should cover every use case scenario and NOT just aim for 100% coverage.
+* Tests for corner/edge/boundary values.
+* Tests for large data sets - this will test runtime and space complexity.
+* Tests for security with users having different roles - behavior may be different based on user's role.
+* Tests for large values - overflow and underflow errors for data types like integer.
+* Tests for exceptions and errors.
+* Tests for illegal arguments or bad inputs.
